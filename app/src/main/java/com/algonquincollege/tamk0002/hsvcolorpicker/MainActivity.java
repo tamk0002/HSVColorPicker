@@ -54,13 +54,13 @@ public class MainActivity extends Activity implements Observer, SeekBar.OnSeekBa
         mModel.addObserver(this);
 
 
-        mColorSwatch = (TextView) findViewById(R.id.colorSwatch);
-        mHueSB = (SeekBar) findViewById(R.id.hueSB);
-        mSaturationSB = (SeekBar) findViewById(R.id.saturationSB);
-        mValueSB = (SeekBar) findViewById(R.id.valueSB);
-        mHueTV = (TextView) findViewById(R.id.hue);
-        mSaturationTV = (TextView) findViewById(R.id.saturation);
-        mValueTV = (TextView) findViewById(R.id.value);
+        mColorSwatch = findViewById(R.id.colorSwatch);
+        mHueSB = findViewById(R.id.hueSB);
+        mSaturationSB = findViewById(R.id.saturationSB);
+        mValueSB = findViewById(R.id.valueSB);
+        mHueTV = findViewById(R.id.hue);
+        mSaturationTV = findViewById(R.id.saturation);
+        mValueTV = findViewById(R.id.value);
 
 
         mHueSB.setMax(Math.round(HSVModel.MAX_HUE));
