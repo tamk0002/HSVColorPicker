@@ -142,15 +142,6 @@ public class HSVModel extends Observable {
         this.updateObservers();
     }
 
-//    private void setColor() {
-//        this.color = Color.HSVToColor(new float[]{
-//                this.hue,
-//                this.saturation,
-//                this.value
-//        });
-//        this.updateObservers();
-//    }
-
     private void updateObservers() {
         this.setChanged();
         this.notifyObservers();
