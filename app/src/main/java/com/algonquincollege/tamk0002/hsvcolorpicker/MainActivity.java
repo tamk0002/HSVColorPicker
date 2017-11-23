@@ -2,6 +2,7 @@ package com.algonquincollege.tamk0002.hsvcolorpicker;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -46,6 +49,7 @@ public class MainActivity extends Activity implements Observer, SeekBar.OnSeekBa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mModel = new HSVModel();
         mModel.setHue(Math.round(HSVModel.MIN_HUE) * 100);
         mModel.setSaturation(Math.round(HSVModel.MIN_SATURATION_VALUE) * 100);
@@ -78,7 +82,7 @@ public class MainActivity extends Activity implements Observer, SeekBar.OnSeekBa
         mColorSwatch.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(getApplicationContext(), "H: " + mModel.getHue() + "\u00B0 \nS: " + mModel.getSaturation() * 100 + "% \nV: " + mModel.getValue() * 100 + "%", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "H: " + NumberFormat.getInstance().format(mModel.getHue()) + "\u00B0 \nS: " + NumberFormat.getInstance().format(mModel.getSaturation() * 100) + "% \nV: " + NumberFormat.getInstance().format(mModel.getValue() * 100) + "%", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -88,7 +92,7 @@ public class MainActivity extends Activity implements Observer, SeekBar.OnSeekBa
 
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        if (fromUser == false) {
+        if (!fromUser) {
             return;
         }
 
@@ -203,7 +207,7 @@ public class MainActivity extends Activity implements Observer, SeekBar.OnSeekBa
             default:
                 break;
         }
-        Toast.makeText(this, "H: " + mModel.getHue() + "\u00B0 \nS: " + mModel.getSaturation() * 100 + "% \nV: " + mModel.getValue() * 100 + "%", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "H: " + NumberFormat.getInstance().format(mModel.getHue()) + "\u00B0 \nS: " + NumberFormat.getInstance().format(mModel.getSaturation() * 100) + "% \nV: " + NumberFormat.getInstance().format(mModel.getValue() * 100) + "%", Toast.LENGTH_SHORT).show();
         updateColorSwatch();
 
     }
@@ -232,6 +236,18 @@ public class MainActivity extends Activity implements Observer, SeekBar.OnSeekBa
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private static final String ABOUT_DIALOG_TAG = "About Dialog";
