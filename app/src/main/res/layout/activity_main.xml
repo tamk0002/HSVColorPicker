@@ -12,8 +12,10 @@
 
     <TextView
         android:id="@+id/colorSwatch"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="190dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -21,10 +23,24 @@
         android:background="#000"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <FrameLayout
+        android:id="@+id/colorTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/color_picker"
+            android:layout_marginTop="0dp"
+            android:layout_above="@+id/colorSwatch"/>
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/hue"
         style="@style/sbLabels"
-        android:layout_below="@+id/colorSwatch"
+        android:layout_below="@+id/colorTv"
         android:layout_marginTop="32dp"
         android:labelFor="@+id/hueSB"
         android:text="@string/hue" />
